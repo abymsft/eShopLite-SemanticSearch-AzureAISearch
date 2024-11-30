@@ -13,7 +13,8 @@
 - Run solution
   - [Run locally](#run-locally)
   - [Run the solution](#run-the-solution)
-  - [Local dev using an existing model](#local-development-using-an-existing-gpt-4o-model)
+  - [Analyze the Vector Store in Azure AI Search](#analyze-the-vector-store-in-azure-ai-search)
+  - [Local dev using existing services](#local-development-using-an-existing-services)
 - [Resources](#resources)
 - [Video Recordings](#video-recordings)
 - [Guidance](#guidance)
@@ -35,14 +36,15 @@ This is the eShopLite Aplication running, performing a **Semantic Search**:
 
 The Aspire Dashboard to check the running services:
 
-![Aspire Dashboard to check the running services](./images/10AzureResources.png)
+![Aspire Dashboard to check the running services](./images/15AspireDashboard.png)
 
 The Azure Resource Group with all the deployed services:
 
-WWW 
-<!-- WWW ![Azure Resource Group with all the deployed services](./images/15AspireDashboard.png) -->
+![Azure Resource Group with all the deployed services](./images/10AzureResources.png)
 
 ## Architecture diagram
+
+**Coming soon!**
 
 ![Architecture diagram](./images/30Diagram.png)
 
@@ -76,8 +78,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 1. This is an example of the command output:
 
-WWW
-<!-- ![Deploy Azure Complete](./images/20AzdUpConsoleComplete.png) -->
+  ![Deploy Azure Complete](./images/20AzdUpConsoleComplete.png)
 
 1. **Coming Soon!** You can check this video with a 5 minutes overview of the deploy process from codespaces: [Deploy Your **eShopLite - Semantic Search - Azure AI Search** to Azure in Minutes!]().
 
@@ -87,8 +88,7 @@ WWW
 
 - Create a new  Codespace using the `Code` button at the top of the repository.
 
-WWW
-<!-- ![create Codespace](./images/25CreateCodeSpaces.png) -->
+  ![create Codespace](./images/25CreateCodeSpaces.png)
 
 - The Codespace creation process can take a couple of minutes.
 
@@ -124,9 +124,47 @@ cd ./src/eShopAppHost/
 dotnet run
 ```
 
-### Local development using an existing gpt-4o-mini and ada-002 model
+### Analyze the Vector Store in Azure AI Search
 
-In order to use existing Azure AI Search services and existing Azure OpenAI models: gpt-4o-mini and text-embedding-ada-002, you need to define specific connection strings in the `Products` project.
+To create and fill with data the Vector Store in Azure AI Search, you need to perform a Semantic Search in the application.
+
+![perform a Semantic Search in the application](./images/40SemantiSearchResultinBlazorApp.png)
+
+The first search will fill the Vector Store with all the store products.
+
+![The first search will fill the Vector Store with all the store products.](./images/421stSemanticSearchInitTheVectorStore.png)
+
+When you perform a new Semantic Search, the elapsed time will be must faster than the 1st one.
+
+![the elapsed time will be must faster than the 1st one](./images/442ndSemantiSearchtimes.png)
+
+And the trace will show:
+
+- The search request from `store` to `products`
+- `products` calling the Azure OpenAI embedding model to generate an embedding with the search criteria
+- `products` calling the Azure AI Search to query the vector store using the search criteria
+- `products` calling the Azure OpenAI chat model to generate a user friendly response
+
+![Complete trace for a standard semantic search](./images/46TraceForStandardSemanticSearch.png)
+
+You can also open the Azure AI Search resource in the Azure portal, and check the created index **products** with the data and fields.
+
+![Azure AI Search resource in the Azure portal, and check the created index **products** with the data and fields](./images/48AzureAISearchIndex.png)
+
+
+### Local development using an existing services
+
+In order to use existing Azure AI Search services and existing Azure OpenAI models: gpt-4o-mini and text-embedding-ada-002, you need to make changes in 2 projects:
+
+#### Aspire AppHost
+
+Open the `program.cs` in `.\src\eShopAppHost\eShopAppHost.csproj`, and comment the main aspire lines, and uncomment the lines to only create and run the sqldb, the api project and the front end.
+
+![Comment the aspire lines and uncomment the last lines](./images/30RunUsingExistingServices.png)
+
+#### Products
+
+Edit and define specific connection strings in the `Products` project.
 
 Add a user secret with the configuration:
 
