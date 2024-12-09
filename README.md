@@ -157,7 +157,7 @@ In order to use existing Azure AI Search services and existing Azure OpenAI mode
 
 #### Aspire AppHost
 
-Open the `program.cs` in `.\src\eShopAppHost\eShopAppHost.csproj`, and comment the main aspire lines, and uncomment the lines to only create and run the sqldb, the api project and the front end.
+Open the `program.cs` in `.\src\eShopAppHost\`, and comment the main aspire lines, and uncomment the lines to only create and run the sqldb, the api project and the front end.
 
 ![Comment the aspire lines and uncomment the last lines](./images/30RunUsingExistingServices.png)
 
