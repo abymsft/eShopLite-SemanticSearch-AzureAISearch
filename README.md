@@ -165,13 +165,12 @@ Open the `program.cs` in `.\src\eShopAppHost\eShopAppHost.csproj`, and comment t
 
 Edit and define specific connection strings in the `Products` project.
 
-Add a user secret with the configuration:
+Add a user secret running the commands:
 
 ```bash
-{
-  "ConnectionStrings:openaidev": "Endpoint=https://<endpoint>.openai.azure.com/;Key=<Azure OpenAI Service key>;",
-"ConnectionStrings:azureaisearchdev": "Endpoint=https://<endpoint>.search.windows.net/;Key=<Azure AI Search key>;"
-}
+cd src/Products
+dotnet user-secrets set "ConnectionStrings:openaidev" "Endpoint=https://<endpoint>.openai.azure.com/;Key=<Azure OpenAI Service key>;"
+dotnet user-secrets set "ConnectionStrings:azureaisearchdev" "Endpoint=https://<endpoint>.search.windows.net/;Key=<Azure AI Search key>;"
 ```
 
 In Debug mode, the `Products` project by default uses the User Secrets connections strings to connect to Azure AI Search and to Azure OpenAI Models. The connection strings names are `azureaisearchdev` and `openaidev`.
