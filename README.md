@@ -45,8 +45,6 @@ The Azure Resource Group with all the deployed services:
 
 ## Architecture diagram
 
-**Coming soon!**
-
 ![Architecture diagram](./images/30Diagram.png)
 
 ## Getting Started
