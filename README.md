@@ -15,6 +15,7 @@
   - [Run the solution](#run-the-solution)
   - [Analyze the Vector Store in Azure AI Search](#analyze-the-vector-store-in-azure-ai-search)
   - [Local dev using existing services](#local-development-using-an-existing-services)
+  - [Telemetry with .NET Aspire and Azure Application Insights](#telemetry-with-net-aspire-and-azure-application-insights)
 - [Resources](#resources)
 - [Video Recordings](#video-recordings)
 - [Guidance](#guidance)
@@ -201,6 +202,20 @@ var azureOpenAiClientName = "openai";
 builder.AddAzureOpenAIClient(azureOpenAiClientName);
 ```
 
+### Telemetry with .NET Aspire and Azure Application Insights
+
+The eShopLite solution leverages the Aspire Dashboard and Azure Application Insights to provide comprehensive telemetry and monitoring capabilities
+
+The **.NET Aspire Dashboard** offers a centralized view of the application's performance, health, and usage metrics. It integrates seamlessly with the Azure OpenAI services, allowing developers to monitor the performance of the `gpt-4o-mini` and `text-embedding-ada-002` models. The dashboard provides real-time insights into the application's behavior, helping to identify and resolve issues quickly.
+
+![Aspire Dashboard](./images/50AspireDashboard.png)
+
+**Azure Application Insights** complements the Aspire Dashboard by offering deep diagnostic capabilities and advanced analytics. It collects detailed telemetry data, including request rates, response times, and failure rates, enabling developers to understand how the application is performing under different conditions. Application Insights also provides powerful querying and visualization tools, making it easier to analyze trends and detect anomalies. 
+
+![Azure Application Insights](./images/52AppInsightsDashboard.png)
+
+By combining the Aspire Dashboard with Azure Application Insights, the eShopLite solution ensures robust monitoring and diagnostics, enhancing the overall reliability and performance of the application.
+
 ## Guidance
 
 ### Costs
@@ -216,6 +231,7 @@ You can try the [Azure pricing calculator](https://azure.com/e/2176802ea14941e49
 - Azure Container Registry: Basic tier. [Pricing](https://azure.microsoft.com/pricing/details/container-registry/)
 - Log analytics: Pay-as-you-go tier. Costs based on data ingested. [Pricing](https://azure.microsoft.com/pricing/details/monitor/)
 - Azure AI Search: [Basic tier](https://azure.microsoft.com/pricing/details/search/). You can edit the bicep files to change for the free tier.
+- Azure Application Insights pricing is based on a Pay-As-You-Go model. [Pricing](https://learn.microsoft.com/azure/azure-monitor/logs/cost-logs).
 
 ⚠️ To avoid unnecessary costs, remember to take down your app if it's no longer in use, either by deleting the resource group in the Portal or running `azd down`.
 

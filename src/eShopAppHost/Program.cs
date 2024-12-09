@@ -2,6 +2,8 @@ using Microsoft.Extensions.Hosting;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
+var appInsights = builder.AddAzureApplicationInsights("appInsights");
+
 var sqldb = builder.AddSqlServer("sql")
     .WithDataVolume()
     .AddDatabase("sqldb");
@@ -23,6 +25,7 @@ var azureaisearch = builder.AddAzureSearch("azureaisearch");
 var products = builder.AddProject<Projects.Products>("products")
     .WithReference(sqldb)
     .WithReference(azureaisearch)
+    .WithReference(appInsights)
     .WithReference(aoai)
     .WithEnvironment("AI_ChatDeploymentName", chatDeploymentName)
     .WithEnvironment("AI_embeddingsDeploymentName", embeddingsDeploymentName);
@@ -30,6 +33,7 @@ var products = builder.AddProject<Projects.Products>("products")
 var store = builder.AddProject<Projects.Store>("store")
     .WithReference(products)
     .WithReference(azureaisearch)
+    .WithReference(appInsights)
     .WithExternalHttpEndpoints();
 
 // comment the previous lines and uncomment this for local dev using existing services for Azure OpenAI and Azure AI Search
