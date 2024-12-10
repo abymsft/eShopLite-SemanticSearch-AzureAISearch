@@ -2,8 +2,9 @@
 [![Twitter: elbruno](https://img.shields.io/twitter/follow/elbruno.svg?style=social)](https://twitter.com/elbruno)
 ![GitHub: elbruno](https://img.shields.io/github/followers/elbruno?style=social)
 
+## ⚠️Warning⚠️
+**Bad practices have been intentionally added to the source code in this repository.
 ## Description
-
 **eShopLite - Semantic Search - Azure AI Search** is a reference .NET application implementing an eCommerce site with Search features using **Keyword Search with SQL queries**, and **Semantic Search with Vector Database and Azure AI Search**.
 
 - [Features](#features)
